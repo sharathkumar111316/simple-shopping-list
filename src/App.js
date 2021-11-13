@@ -1,4 +1,4 @@
-import React, {useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './index.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronRight, faChevronLeft, faCircle, faCheckCircle, faPlus } from '@fortawesome/free-solid-svg-icons';
@@ -22,9 +22,8 @@ const App = () => {
     };
     const newItems = [...items, newItem];
     setItems(newItems);
-    setInputValue('');
-
-    calculateTotal();
+    setInputValue('');    
+    calculateTotal(newItems);
   };
 
   const handleQuantityIncrease = (index) => {
@@ -34,7 +33,7 @@ const App = () => {
 
     setItems(newItems);
 
-    calculateTotal();
+    calculateTotal(newItems);
 
   };
 
@@ -48,7 +47,7 @@ const App = () => {
 
     setItems(newItems);
 
-    calculateTotal();
+    calculateTotal(newItems);
 
   };
 
@@ -58,12 +57,13 @@ const App = () => {
     setItems(newItems);
   };  
 
-  const calculateTotal = () => {
-    const totalItemCount = items.reduce((total, item) => {
+  const calculateTotal = (newItems) => {
+    const totalItemCount = newItems.reduce((total, item) => {
       return total = total + item.quantity;
       },0);
     setTotalItemCount(totalItemCount);
-  };  
+
+  };
 
   return (
     <div className='app-background'>
